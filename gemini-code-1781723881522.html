@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berry Manamani | Fire-Grilled Perfection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #ff6b35;
+            --secondary: #f7931e;
+            --bg-gradient: linear-gradient(135deg, #1a0e0e 0%, #2d1414 50%, #1a0e0e 100%);
+            --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            --border: rgba(255, 87, 34, 0.2);
+            --text: #fff;
+            --text-muted: #aaa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Utility Classes / Animations */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 87, 34, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(255, 87, 34, 0.3);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-family: 'Righteous', cursive;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .logo p {
+            color: #ff9770;
+            font-size: 0.9rem;
+            font-weight: 300;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cart-btn {
+            position: relative;
+        }
+
+        .cart-badge {
+            background: #fff;
+            color: var(--primary);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            border: 2px solid #1a0e0e;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            font-family: 'Righteous', cursive;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.4);
+        }
+
+        .hero h2 span { color: var(--primary); }
+        .hero p { max-width: 600px; margin: 0 auto 2rem; color: #ccc; }
+
+        .info-strip {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            color: #ddd;
+        }
+
+        /* Loyalty Widget */
+        .loyalty-widget {
+            max-width: 400px;
+            margin: 1.5rem auto 0;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px dashed var(--primary);
+            padding: 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Categories */
+        .categories {
+            padding: 1.5rem;
+            background: rgba(0,0,0,0.3);
+            border-block: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 87, 34, 0.3);
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Menu Grid */
+        .menu-section { max-width: 1200px; margin: 3rem auto; padding: 0 2rem; }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 87, 34, 0.25);
+            border-color: rgba(255, 87, 34, 0.5);
+        }
+
+        .item-emoji {
+            background: rgba(255, 107, 53, 0.15);
+            padding: 2.5rem;
+            text-align: center;
+            font-size: 3.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .item-details { padding: 1.5rem; }
+        .item-title { font-size: 1.2rem; font-weight: 700; display: flex; justify-content: space-between; }
+        .item-desc { color: var(--text-muted); font-size: 0.85rem; margin: 0.5rem 0 1rem; min-height: 40px; }
+        .item-footer { display: flex; justify-content: space-between; align-items: center; }
+        .item-price { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+
+        .popular-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(90deg, #ff6b35, #f7931e);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Sidebar Cart Panel */
+        .cart-sidebar {
+            position: fixed;
+            top: 0; right: -450px;
+            width: 100%; max-width: 450px; height: 100vh;
+            background: linear-gradient(135deg, #2d1414 0%, #1a0e0e 100%);
+            box-shadow: -5px 0 30px rgba(0,0,0,0.5);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open { right: 0; }
+
+        .cart-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid rgba(255, 87, 34, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+        }
+
+        .cart-items-container { flex: 1; overflow-y: auto; padding: 1.5rem; }
+        .cart-item {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+        .cart-item-controls { display: flex; align-items: center; gap: 0.8rem; }
+        
+        .qty-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid var(--primary);
+            color: #fff; width: 28px; height: 28px; border-radius: 6px; cursor: pointer;
+        }
+
+        .cart-footer { padding: 1.5rem; border-top: 2px solid rgba(255, 87, 34, 0.3); background: rgba(0,0,0,0.2); }
+        .total-row { display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: bold; margin-bottom: 1rem; }
+
+        /* Modals & Checkouts */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 1005;
+            display: none; justify-content: center; align-items: center; padding: 1rem;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #2d1414 0%, #1a0e0e 100%);
+            border: 2px solid rgba(255, 87, 34, 0.3);
+            border-radius: 20px; width: 100%; max-width: 550px;
+            max-height: 90vh; overflow-y: auto; padding: 2rem;
+            position: relative;
+        }
+
+        .close-modal { position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem; cursor: pointer; background:none; border:none; color:#fff; }
+
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.4rem; font-size: 0.9rem; color: #ff9770; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255, 87, 34, 0.3); border-radius: 8px; color: #fff; font-size: 1rem;
+        }
+
+        .bank-details-box {
+            background: rgba(255, 107, 53, 0.08);
+            border: 1px solid rgba(255, 87, 34, 0.4);
+            padding: 1rem; border-radius: 10px; margin-top: 1rem;
+        }
+
+        .bank-details-box p { font-size: 0.9rem; margin-bottom: 0.3rem; }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.6); text-align: center;
+            padding: 2.5rem; border-top: 2px solid rgba(255, 87, 34, 0.3); margin-top: 5rem;
+        }
+
+        .backdrop {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 999; display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="backdrop" id="backdrop" onclick="toggleCart(false)"></div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1>BERRY MANAMANI</h1>
+                <p>🔥 Authentic Grilled Goodness</p>
+            </div>
+            <div class="header-right">
+                <span style="font-size: 0.9rem; color: #ddd;"><i class="fa fa-phone" style="color:var(--primary)"></i> 082 123 4567</span>
+                <button class="btn-primary cart-btn" onclick="toggleCart(true)">
+                    <i class="fa fa-shopping-cart"></i> Cart
+                    <span class="cart-badge" id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h2>Fire-Grilled<br><span>Perfection</span></h2>
+        <p>Experience the authentic taste of expertly grilled chicken, tender livers, and flavorful sides. Order now and collect or get it delivered hot to your door!</p>
+        <div class="info-strip">
+            <span><i class="fa fa-clock" style="color:var(--primary)"></i> Mon-Sat: 11AM - 9PM</span>
+            <span><i class="fa fa-map-marker-alt" style="color:var(--primary)"></i> Kimberley, Northern Cape</span>
+        </div>
+        
+        <div class="loyalty-widget">
+            <i class="fa fa-star" style="color:#f7931e"></i>
+            <span id="loyalty-display">Loading your Loyalty Points...</span>
+        </div>
+    </section>
+
+    <div class="categories">
+        <button class="cat-btn active" onclick="filterMenu('all', this)">🍽️ All Items</button>
+        <button class="cat-btn" onclick="filterMenu('mains', this)">  Mains</button>
+        <button class="cat-btn" onclick="filterMenu('combos', this)">🍱 Combos</button>
+        <button class="cat-btn" onclick="filterMenu('sides', this)">🥗 Sides</button>
+    </div>
+
+    <section class="menu-section">
+        <div class="menu-grid" id="menu-container">
+            </div>
+    </section>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3><i class="fa fa-shopping-cart" style="color:var(--primary)"></i> Your Order Basket</h3>
+            <button onclick="toggleCart(false)" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="cart-items-container" id="cart-items">
+            </div>
+        <div class="cart-footer">
+            <div class="total-row">
+                <span>Total Amount:</span>
+                <span style="color:var(--primary)" id="cart-total">R0.00</span>
+            </div>
+            <div style="font-size:0.85rem; color:#ff9770; margin-bottom:1rem; text-align:center;" id="checkout-points-estimate">
+                🛒 This order earns you 0 loyalty points!
+            </div>
+            <button class="btn-primary" style="width:100%; justify-content:center; padding:1rem;" onclick="openCheckoutModal()">Proceed to Payment & Checkout</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeCheckoutModal()"><i class="fa fa-times"></i></button>
+            <h2 style="margin-bottom:1.5rem; color:var(--primary)"><i class="fa fa-receipt"></i> Checkout Details</h2>
+            
+            <form id="order-form" onsubmit="handleOrderSubmission(event)">
+                <div class="form-group">
+                    <label>Your Full Name</label>
+                    <input type="text" id="cust-name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="cust-phone" required placeholder="082 123 4567">
+                </div>
+                <div class="form-group">
+                    <label>Delivery Address / Collection Type</label>
+                    <textarea id="cust-address" rows="2" required placeholder="Write 'Collection' or your full dropoff address..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Payment Option</label>
+                    <select id="payment-method" onchange="toggleBankBox()" style="width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255, 87, 34, 0.3); border-radius: 8px; color: #fff; font-size: 1rem;">
+                        <option value="cash">💵 Cash on Delivery / Pickup</option>
+                        <option value="bank_transfer">🏦 Direct Instant Bank Transfer (EFT)</option>
+                    </select>
+                </div>
+
+                <div class="bank-details-box" id="bank-box" style="display:none;">
+                    <h4 style="color:#f7931e; margin-bottom: 0.5rem;"><i class="fa fa-university"></i> Official Payment Destination</h4>
+                    <p><strong>Bank Name:</strong> Capitec Bank (or Your Bank Name)</p>
+                    <p><strong>Account Number:</strong> 1234567890</p>
+                    <p><strong>Branch Code:</strong> 470010</p>
+                    <p><strong>Account Type:</strong> Savings / Current</p>
+                    <p style="font-size:0.8rem; color:#aaa; margin-top:0.5rem;">⚠️ Please use your <strong>Phone Number</strong> as your payment reference.</p>
+                </div>
+
+                <div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:10px; margin-block:1.5rem; border:1px solid var(--border)">
+                    <p style="display:flex; justify-content:space-between;"><span>Items Cost:</span><span id="summary-total">R0</span></p>
+                </div>
+
+                <button type="submit" class="btn-primary" style="width:100%; justify-content:center; padding:1.25rem; font-size:1.1rem;">
+                    <i class="fa fa-paper-plane"></i> Finalize & Place Order
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal-content" style="text-align: center; padding: 3rem 2rem;">
+            <div style="width:80px; height:80px; background:linear-gradient(135deg, #ff6b35, #f7931e); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem;">
+                <i class="fa fa-check" style="font-size:2.5rem; color:#fff"></i>
+            </div>
+            <h2 style="color:var(--primary); margin-bottom:1rem;">Order Submitted Successfully!</h2>
+            <p style="margin-bottom:1rem;">The digital breakdown was transmitted straight to our kitchen and a confirmation copy dispatch has been initiated.</p>
+            <p style="color:#f7931e; font-weight:600;" id="earned-points-banner"></p>
+            <button class="btn-primary" style="margin-top:2rem;" onclick="closeSuccessModal()">Awesome, thank you!</button>
+        </div>
+    </div>
+
+    <footer>
+        <h3 style="font-family:'Righteous'; color:var(--primary); font-size:1.5rem; margin-bottom:0.5rem;">BERRY MANAMANI</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Authentic grilled goodness, delivered straight to your door.</p>
+        <p style="color:#555; font-size:0.8rem;">&copy; 2026 Berry Manamani. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Initialize EmailJS configuration framework 
+        // Replace "YOUR_PUBLIC_KEY" with your EmailJS Dashboard Public Key
+        emailjs.init("YOUR_PUBLIC_KEY");
+
+        // Menu Data Store Injection
+        const menuItems = [
+            { id: 1, name: "Chicken Livers", category: "mains", description: "Tender chicken livers in rich, spicy sauce", price: 45, image: "🍖", spicy: true },
+            { id: 2, name: "Grilled Chicken Wings", category: "mains", description: "Perfectly grilled wings with our signature BBQ sauce", price: 65, image: "🍗" },
+            { id: 3, name: "Chicken & Liver Combo", category: "combos", description: "Mix of grilled chicken and spicy livers with 2 sides", price: 85, image: "🍽️", popular: true },
+            { id: 4, name: "Full Chicken Platter", category: "combos", description: "Whole grilled chicken with coleslaw and beans", price: 120, image: "🍗", popular: true },
+            { id: 5, name: "Coleslaw", category: "sides", description: "Fresh, creamy homemade coleslaw", price: 15, image: "🥗" },
+            { id: 6, name: "Baked Beans", category: "sides", description: "Hearty baked beans with sweet sauce", price: 20, image: "🫘" },
+            { id: 7, name: "Grilled Quarter Chicken", category: "mains", description: "Tender quarter chicken with BBQ glaze", price: 50, image: "🍗" },
+            { id: 8, name: "Mixed Grill Box", category: "combos", description: "Chicken, livers, and 2 sides of your choice", price: 95, image: "🍱", popular: true }
+        ];
+
+        let cart = [];
+        let globalUserLoyaltyPoints = parseInt(localStorage.getItem('berry_loyalty_points')) || 0;
+
+        // Render Menu Cards UI dynamically
+        function displayMenu(items) {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = '';
+            items.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'menu-item';
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.setAttribute('data-category', item.category);
+                
+                card.innerHTML = `
+                    ${item.popular ? '<div class="popular-badge">🔥 POPULAR</div>' : ''}
+                    <div class="item-emoji">${item.image}</div>
+                    <div class="item-details">
+                        <div class="item-title">
+                            <span>${item.name} ${item.spicy ? '🌶️' : ''}</span>
+                        </div>
+                        <p class="item-desc">${item.description}</p>
+                        <div class="item-footer">
+                            <span class="item-price">R${item.price}</span>
+                            <button class="btn-primary" onclick="addToCart(${item.id})"><i class="fa fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Active Category filtering operations
+        function filterMenu(category, element) {
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            if(category === 'all') {
+                displayMenu(menuItems);
+            } else {
+                const filtered = menuItems.filter(item => item.category === category);
+                displayMenu(filtered);
+            }
+        }
+
+        // Cart Actions Engine
+        function addToCart(id) {
+            const item = menuItems.find(p => p.id === id);
+            const structureCheck = cart.find(cartItem => cartItem.id === id);
+            
+            if(structureCheck) {
+                structureCheck.quantity += 1;
+            } else {
+                cart.push({...item, quantity: 1});
+            }
+            updateCartUI();
+        }
+
+        function updateQty(id, delta) {
+            const target = cart.find(p => p.id === id);
+            if(target) {
+                target.quantity += delta;
+                if(target.quantity <= 0) {
+                    cart = cart.filter(p => p.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            // Count total quantities
+            const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+            document.getElementById('cart-count').innerText = totalCount;
+
+            // Generate structural list code strings
+            const itemsBox = document.getElementById('cart-items');
+            itemsBox.innerHTML = '';
+
+            let totalPrice = 0;
+            cart.forEach(item => {
+                totalPrice += (item.price * item.quantity);
+                const itemRow = document.createElement('div');
+                itemRow.className = 'cart-item';
+                itemRow.innerHTML = `
+                    <div class="cart-item-header">
+                        <strong>${item.name}</strong>
+                        <span style="color:var(--primary); font-weight:600;">R${item.price * item.quantity}</span>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button class="qty-btn" onclick="updateQty(${item.id}, -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="qty-btn" onclick="updateQty(${item.id}, 1)">+</button>
+                    </div>
+                `;
+                itemsBox.appendChild(itemRow);
+            });
+
+            if(cart.length === 0) {
+                itemsBox.innerHTML = `<p style="color:var(--text-muted); text-align:center; padding-top:2rem;">Your cart is entirely empty.</p>`;
+            }
+
+            document.getElementById('cart-total').innerText = `R${totalPrice}`;
+            document.getElementById('summary-total').innerText = `R${totalPrice}`;
+            
+            // Calculate loyalty allocation tracking projection (e.g., 1 point per R10 spent)
+            let trackingEstimate = Math.floor(totalPrice / 10);
+            document.getElementById('checkout-points-estimate').innerText = `🛒 This order earns you ${trackingEstimate} loyalty points!`;
+        }
+
+        function toggleCart(open) {
+            const sidebar = document.getElementById('cart-sidebar');
+            const backdrop = document.getElementById('backdrop');
+            if(open) {
+                sidebar.classList.add('open');
+                backdrop.style.display = 'block';
+            } else {
+                sidebar.classList.remove('open');
+                backdrop.style.display = 'none';
+            }
+        }
+
+        // Modal triggers
+        function openCheckoutModal() {
+            if(cart.length === 0) {
+                alert("Please add some meals to your cart before checking out!");
+                return;
+            }
+            toggleCart(false);
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').style.display = 'none';
+        }
+
+        function toggleBankBox() {
+            const selector = document.getElementById('payment-method').value;
+            const bankBox = document.getElementById('bank-box');
+            bankBox.style.display = (selector === 'bank_transfer') ? 'block' : 'none';
+        }
+
+        // Loyalty Logic Tracking Runtime
+        function refreshLoyaltyDisplay() {
+            document.getElementById('loyalty-display').innerText = `Your Current Loyalty balance: ${globalUserLoyaltyPoints} Points`;
+        }
+
+        // Email Form Processing Submission Action Handler via EmailJS
+        function handleOrderSubmission(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('cust-name').value;
+            const phone = document.getElementById('cust-phone').value;
+            const address = document.getElementById('cust-address').value;
+            const payment = document.getElementById('payment-method').value;
+            
+            let totalAmount = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            let earnedPoints = Math.floor(totalAmount / 10);
+
+            // Structure a clean text summary of purchased items
+            let itemsSummaryString = cart.map(item => `${item.name} (x${item.quantity}) - R${item.price * item.quantity}`).join("\n");
+
+            // Prepare parameters exactly matched to your EmailJS email template fields
+            const templateParams = {
+                to_email: "your-email@example.com", // Replace with your operational email address
+                customer_name: name,
+                customer_phone: phone,
+                delivery_address: address,
+                payment_option: payment.toUpperCase(),
+                order_items_summary: itemsSummaryString,
+                total_cost: `R${totalAmount}`,
+                loyalty_points_earned: earnedPoints
+            };
+
+            /* EmailJS Send Command:
+               Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with the codes 
+               provided inside your EmailJS Account Dashboard.
+            */
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS Email Dispatched!', response.status, response.text);
+                }, function(error) {
+                    console.log('FAILED transmitting via EmailJS Service...', error);
+                    // Standard fallback text copy to allow ordering even if keys aren't configured yet
+                    alert("Order processed locally! (Set up your EmailJS Service/Template IDs in the code to receive notifications).");
+                });
+
+            // Update user loyalty program points
+            globalUserLoyaltyPoints += earnedPoints;
+            localStorage.setItem('berry_loyalty_points', globalUserLoyaltyPoints);
+            refreshLoyaltyDisplay();
+
+            // Open confirmation screen
+            document.getElementById('checkout-modal').style.display = 'none';
+            document.getElementById('earned-points-banner').innerText = `⭐ You just earned +${earnedPoints} Loyalty Points!`;
+            document.getElementById('success-modal').style.display = 'flex';
+
+            // Wipe tracking states
+            cart = [];
+            updateCartUI();
+            document.getElementById('order-form').reset();
+            document.getElementById('bank-box').style.display = 'none';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+
+        // Initializer loop
+        window.onload = () => {
+            displayMenu(menuItems);
+            refreshLoyaltyDisplay();
+        };
+    </script>
+</body>
+</html>
